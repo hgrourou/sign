@@ -1,6 +1,7 @@
 package com.signin.demo.dao;
 
 import com.signin.demo.entity.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -15,4 +16,9 @@ public interface UserDAO {
             @Result(property = "number", column = "number")
     })
     public User getUser(Integer id);
+
+
+    @Insert("insert into user (name, phone, number, password, create_time, update_time) " +
+        "values (#{name}, #{phone}, #{number}, #{password}, #{createTime}, #{updateTime} )")
+    public Integer userRegister(User user);
 }

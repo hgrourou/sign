@@ -7,6 +7,9 @@ public class Message {
 
 
     public static final Message UNAUTHORIZED = new Message(401, "UNAUTHORIZED");
+
+
+    public static final Message LOGINERROR = new Message(400, "LOGINERROR");
     public static final Message ACCOUNT_NOT_ACTIVATED = new Message(1003, "Your account is not activated");
 
 

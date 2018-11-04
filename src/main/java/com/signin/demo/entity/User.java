@@ -5,10 +5,11 @@ import java.util.Date;
 public class User {
     private Integer id;
     private String name;
-    private Long phone;
+    private String password;
+    private String phone;
     private Long number;
-    private Date insertTime;
-    private Date updateTime;
+    private Long createTime;
+    private Long updateTime;
 
     public Integer getId() {
         return id;
@@ -26,11 +27,19 @@ public class User {
         this.name = name;
     }
 
-    public Long getPhone() {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -42,19 +51,19 @@ public class User {
         this.number = number;
     }
 
-    public Date getInsertTime() {
-        return insertTime;
+    public Long getCreateTime() {
+        return createTime;
     }
 
-    public void setInsertTime(Date insertTime) {
-        this.insertTime = insertTime;
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 }
