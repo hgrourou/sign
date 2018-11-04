@@ -5,6 +5,8 @@ out/
 .gradle/
 build/
 
+*.properties
+
 # Log file
 *.log
 
