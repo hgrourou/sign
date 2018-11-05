@@ -7,18 +7,15 @@ import org.apache.ibatis.annotations.Select;
 
 public interface AccountDao {
 
-    @Select("SELECT * FROM account WHERE username = #{username}")
+    @Select("SELECT * FROM user WHERE number = #{number}")
     @Results({
-            @Result(property = "userId", column = "user_id"),
-            @Result(property = "username", column = "username"),
+            @Result(property = "id", column = "id"),
+            @Result(property = "number", column = "number"),
+            @Result(property = "name", column = "name"),
             @Result(property = "password", column = "password"),
-            @Result(property = "nickname", column = "nickname"),
-            @Result(property = "description", column = "description"),
-            @Result(property = "ctime", column = "ctime"),
-            @Result(property = "utime", column = "utime"),
-            @Result(property = "locked", column = "locked"),
+            @Result(property = "phone", column = "phone"),
             @Result(property = "accessToken", column = "access_token"),
-            @Result(property = "role", column = "role"),
-            @Result(property = "expireTime", column = "expire_time")})
-    public User getAccountByUsername(String username);
+            @Result(property = "role", column = "roles"),
+            @Result(property = "expireTime", column = "expires")})
+    public User getAccountByUsername(String number);
 }

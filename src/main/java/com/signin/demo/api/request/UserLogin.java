@@ -2,15 +2,15 @@ package com.signin.demo.api.request;
 
 public class UserLogin {
 
-    private String username;
+    private Long number;
     private String password;
 
-    public String getUsername() {
-        return username;
+    public Long getNumber() {
+        return number;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setNumber(Long number) {
+        this.number = number;
     }
 
     public String getPassword() {

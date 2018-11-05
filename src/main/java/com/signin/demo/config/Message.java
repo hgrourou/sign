@@ -9,7 +9,14 @@ public class Message {
     public static final Message UNAUTHORIZED = new Message(401, "UNAUTHORIZED");
 
 
-    public static final Message LOGINERROR = new Message(400, "LOGINERROR");
+    public static final Message LOGIN_ERROR = new Message(400, "LOGINERROR");
+
+    public static final Message USER_EXIST = new Message(400, "User exist");
+
+    public static final Message ERROR = new Message(400, "system error");
+
+
+    public static final Message USER_NOT_EXIST = new Message(4, "This user does not exist");
     public static final Message ACCOUNT_NOT_ACTIVATED = new Message(1003, "Your account is not activated");
 
 

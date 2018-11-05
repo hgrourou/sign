@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.ArrayList;
@@ -42,10 +43,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new CsrfSecurityRequestMatcher();
     }
 
+    @Bean
+    public static NoOpPasswordEncoder passwordEncoder() {
+        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService());
+                // .passwordEncoder(new BCryptPasswordEncoder());
     }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -55,7 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new AuthenticationTokenProcessingFilter(userDetailsService()),
                         UsernamePasswordAuthenticationFilter.class);
 
-        http.authorizeRequests().antMatchers("/xu/login").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/user/login", "/user/register").permitAll()
                 .antMatchers("/xu/add/account","/xu/reset","/xu/delete","/xu/article/create","/xu/article/delete/**",
                         "/xu/bbs/delete/**", "/xu/article/update/**")
                 .hasAnyAuthority("ADMIN")
@@ -77,7 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private List<String> excludedUrls() {
         List<String> execludeUrls = new ArrayList<String>();
 
-        execludeUrls.add("/xu");
+        execludeUrls.add("/");
         return execludeUrls;
     }
 }

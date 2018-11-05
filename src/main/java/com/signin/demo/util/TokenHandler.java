@@ -6,12 +6,15 @@ import com.signin.demo.secruity.LoginUser;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.ByteArrayInputStream;
+import java.util.Base64;
 
 public class TokenHandler {
 
     public static LoginUser getUserFromToken(String token) {
         return (token != null) ? fromJSON(fromBase64(token)) : null;
     }
+
+    private static final String UTF_8 = "UTF-8";
 
     public static String createToken(String username, String role, long expires) {
         LoginUser user = new LoginUser();
@@ -42,7 +45,9 @@ public class TokenHandler {
     }
 
     private static String toBase64(byte[] content) {
-        return DatatypeConverter.printBase64Binary(content);
+        String result = Base64.getEncoder().encodeToString(content);
+        // String result = new String(Base64.encodeToString(content), Base64.NO_WRAP);
+        return result;
     }
 
     private static byte[] fromBase64(String content) {

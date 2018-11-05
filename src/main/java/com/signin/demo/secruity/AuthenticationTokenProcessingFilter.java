@@ -21,9 +21,6 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 
     private final UserDetailsService userService;
 
-
-    private String uri;
-
     public AuthenticationTokenProcessingFilter(UserDetailsService userService) {
         this.userService = userService;
     }
