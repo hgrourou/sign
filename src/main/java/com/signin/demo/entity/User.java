@@ -5,7 +5,7 @@ public class User {
     private String name;
     private String password;
     private String phone;
-    private Long number;
+    private String number;
     private String accessToken;
     private Long expireTime;
     private String role;
@@ -44,11 +44,11 @@ public class User {
         this.phone = phone;
     }
 
-    public Long getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

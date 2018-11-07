@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.signin.demo.secruity.LoginUser;
 
-import javax.xml.bind.DatatypeConverter;
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
 
@@ -13,8 +12,6 @@ public class TokenHandler {
     public static LoginUser getUserFromToken(String token) {
         return (token != null) ? fromJSON(fromBase64(token)) : null;
     }
-
-    private static final String UTF_8 = "UTF-8";
 
     public static String createToken(String username, String role, long expires) {
         LoginUser user = new LoginUser();
@@ -51,7 +48,8 @@ public class TokenHandler {
     }
 
     private static byte[] fromBase64(String content) {
-        return DatatypeConverter.parseBase64Binary(content);
+        return Base64.getDecoder().decode(content);
+        // return DatatypeConverter.parseBase64Binary(content);
     }
 
     public static boolean validateToken(String authToken) {

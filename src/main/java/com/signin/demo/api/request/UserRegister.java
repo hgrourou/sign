@@ -1,16 +1,16 @@
 package com.signin.demo.api.request;
 
 public class UserRegister {
-    private Long number;
+    private String number;
     private String phone;
     private String name;
     private String password;
 
-    public Long getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

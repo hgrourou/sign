@@ -3,7 +3,7 @@ package com.signin.demo.api;
 import com.signin.demo.api.request.UserLogin;
 import com.signin.demo.api.request.UserRegister;
 import com.signin.demo.config.Response;
-import com.signin.demo.service.user.UserService;
+import com.signin.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

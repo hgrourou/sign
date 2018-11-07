@@ -1,4 +1,4 @@
-package com.signin.demo.service.imp.user;
+package com.signin.demo.service.impl;
 
 import com.signin.demo.api.request.UserLogin;
 import com.signin.demo.api.request.UserRegister;
@@ -7,7 +7,7 @@ import com.signin.demo.config.Message;
 import com.signin.demo.config.Response;
 import com.signin.demo.dao.UserDAO;
 import com.signin.demo.entity.User;
-import com.signin.demo.service.user.UserService;
+import com.signin.demo.service.UserService;
 import com.signin.demo.util.TokenHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,9 +33,9 @@ public class UserServiceImpl implements UserService {
     private AuthenticationManager authManager;
 
 
-    private String updateAccessToken(Long number, String role) {
+    private String updateAccessToken(String number, String role) {
         long expires = System.currentTimeMillis() + BaseConfig.EXPIRE_IN_TWO_WEEKS;
-        String token = TokenHandler.createToken(number.toString(), role, expires);
+        String token = TokenHandler.createToken(number, role, expires);
         final Long now = System.currentTimeMillis();
         userDAO.updateAccessToken(token, number, expires, now);
         return token;
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Response userLogin(UserLogin userLogin) {
         Response res = new Response();
-        Long number = userLogin.getNumber();
+        String number = userLogin.getNumber();
         String password = userLogin.getPassword();
         if (number == null || password == null) {
             res.setMessage(Message.LOGIN_ERROR);
@@ -100,6 +100,10 @@ public class UserServiceImpl implements UserService {
             userDAO.userRegister(user);
         } catch (Exception e) {
             res.setMessage(Message.ERROR);
+            Map<String, Object> payload = new HashMap<>();
+            payload.put("message", e);
+            res.setPayload(payload);
+            return res;
         }
         res.setMessage(Message.SUCCESS);
         return res;

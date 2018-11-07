@@ -5,9 +5,6 @@ import org.apache.ibatis.annotations.*;
 
 public interface UserDAO {
 
-
-
-
     @Select("select * from user where number = #{number}")
     @Results({
             @Result(property = "id", column = "id"),
@@ -16,13 +13,13 @@ public interface UserDAO {
             @Result(property = "number", column = "number"),
             @Result(property = "role", column = "roles")
     })
-    public User getUserByNumber(Long number);
+    public User getUserByNumber(String number);
 
     @Update("UPDATE user " +
-            "SET access_token = #{accessToken}, expires = #{expireTime}, update_time = #{now} " +
+            "SET access_token = #{accessToken}, expire_time = #{expireTime}, update_time = #{now} " +
             "WHERE number = #{number}")
     public Integer updateAccessToken(@Param("accessToken") String accessToken,
-                                     @Param("number") Long number,
+                                     @Param("number") String number,
                                      @Param("expireTime") Long expireTime,
                                      @Param("now") Long now);
 

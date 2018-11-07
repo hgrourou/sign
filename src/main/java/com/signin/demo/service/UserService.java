@@ -1,4 +1,4 @@
-package com.signin.demo.service.user;
+package com.signin.demo.service;
 
 import com.signin.demo.api.request.UserLogin;
 import com.signin.demo.api.request.UserRegister;

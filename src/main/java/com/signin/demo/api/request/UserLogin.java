@@ -2,14 +2,14 @@ package com.signin.demo.api.request;
 
 public class UserLogin {
 
-    private Long number;
+    private String number;
     private String password;
 
-    public Long getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

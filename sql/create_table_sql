@@ -1,0 +1,25 @@
+CREATE TABLE `signin`.`user`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `password` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `phone` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `number` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `access_token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,
+  `expire_time` bigint(13) NULL DEFAULT NULL,
+  `roles` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `create_time` bigint(255) NULL DEFAULT NULL,
+  `update_time` bigint(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `number`(`number`) USING BTREE,
+  UNIQUE INDEX `id`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+
+
+
+CREATE TABLE `signin`.`sign`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `number` bigint(13) NOT NULL,
+  `insert_time` bigint(13) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;

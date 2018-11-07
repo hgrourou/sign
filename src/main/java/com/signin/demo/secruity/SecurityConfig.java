@@ -64,13 +64,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         UsernamePasswordAuthenticationFilter.class);
 
         http.authorizeRequests()
-                .antMatchers("/user/login", "/user/register").permitAll()
-                .antMatchers("/xu/add/account","/xu/reset","/xu/delete","/xu/article/create","/xu/article/delete/**",
-                        "/xu/bbs/delete/**", "/xu/article/update/**")
-                .hasAnyAuthority("ADMIN")
-                .antMatchers("/xu/profile/**","/xu/changePassword","/xu/article/list","/xu/bbs/list","/xu/article/fetch/**")
-                .hasAnyAuthority("ADMIN","USER")
-                .anyRequest().hasAnyAuthority("USER");
+                .antMatchers("/user/login", "/user/sign", "/user/register").permitAll();
+//                .antMatchers("/user/sign", "/xu/bbs/delete/**")
+//                .hasAnyAuthority("user")
+//                .antMatchers("/xu/profile/**","/xu/changePassword","/xu/article/list","/xu/bbs/list","/xu/article/fetch/**")
+//                .hasAnyAuthority("ADMIN","USER")
+//                .anyRequest().hasAnyAuthority("USER");
 
         http.exceptionHandling()
                 .authenticationEntryPoint(unauthorizedEntryPoint())
