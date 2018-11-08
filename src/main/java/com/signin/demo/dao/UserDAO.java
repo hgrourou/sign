@@ -13,7 +13,7 @@ public interface UserDAO {
             @Result(property = "number", column = "number"),
             @Result(property = "role", column = "roles")
     })
-    public User getUserByNumber(String number);
+    public User getUserByNumber(@Param("number") String number);
 
     @Update("UPDATE user " +
             "SET access_token = #{accessToken}, expire_time = #{expireTime}, update_time = #{now} " +
@@ -29,4 +29,7 @@ public interface UserDAO {
     @Insert("insert into user (name, phone, number, password, roles, create_time, update_time) " +
         "values (#{name}, #{phone}, #{number}, #{password}, #{role}, #{createTime}, #{updateTime} )")
     public Integer userRegister(User user);
+
+    @Update("UPDATE user SET password = #{password} WHERE number = #{number} " )
+    public Integer updateUserPass(User user);
 }

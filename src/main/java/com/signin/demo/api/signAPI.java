@@ -22,8 +22,15 @@ public class signAPI {
     public Response userSign (@RequestHeader HttpHeaders headers) {
         String token = headers.getFirst("X-Auth-Token");
         LoginUser loginUser =  TokenHandler.getUserFromToken(token);
-        // String number = loginUser.getUsername();
         Response res = signService.userSign(loginUser.getUsername());
+        return res;
+    }
+
+    @RequestMapping(value = "/signs", method = RequestMethod.GET)
+    public Response getUserSignList(@RequestHeader HttpHeaders headers) {
+        String token = headers.getFirst("X-Auth-Token");
+        LoginUser loginUser =  TokenHandler.getUserFromToken(token);
+        Response res = signService.getUserSigns(loginUser.getUsername());
         return res;
     }
 }

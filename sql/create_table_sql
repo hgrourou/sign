@@ -18,7 +18,7 @@ CREATE TABLE `signin`.`user`  (
 
 CREATE TABLE `signin`.`sign`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `number` bigint(13) NOT NULL,
+  `number` varchar(45) NOT NULL,
   `insert_time` bigint(13) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE

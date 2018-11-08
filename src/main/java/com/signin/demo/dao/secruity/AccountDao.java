@@ -1,6 +1,7 @@
 package com.signin.demo.dao.secruity;
 
 import com.signin.demo.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -17,5 +18,5 @@ public interface AccountDao {
             @Result(property = "accessToken", column = "access_token"),
             @Result(property = "role", column = "roles"),
             @Result(property = "expireTime", column = "expires")})
-    public User getAccountByUsername(String number);
+    public User getAccountByUsername(@Param("number") String number);
 }

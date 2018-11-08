@@ -11,7 +11,10 @@ import com.signin.demo.util.TimeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class SignServiceImpl implements SignService {
@@ -27,11 +30,11 @@ public class SignServiceImpl implements SignService {
         Response res = new Response();
         User user = userDAO.getUserByNumber(number);
         if (user == null) {
-            res.setMessage(Message.ERROR);
+            res.setMessage(Message.USER_NOT_EXIST);
             return res;
         }
-        Long startTimestamp = TimeHandler.getStartTime();
-        Long endTimestamp = TimeHandler.getEndTime();
+        Long startTimestamp = TimeHandler.getDayStartTime();
+        Long endTimestamp = TimeHandler.getDayEndTime();
         Integer count = signDAO.getCountByStamp(number, startTimestamp, endTimestamp);
         if (count > 0) {
             res.setMessage(Message.HAS_SIGN);
@@ -55,4 +58,22 @@ public class SignServiceImpl implements SignService {
         res.setMessage(Message.SUCCESS);
         return res;
     }
+
+    @Override
+    public Response getUserSigns(String number) {
+        Response res = new Response();
+        User user = userDAO.getUserByNumber(number);
+        if (user == null) {
+            res.setMessage(Message.USER_NOT_EXIST);
+            return res;
+        }
+
+        ArrayList<Sign> list = signDAO.getUserSIgnList(number, TimeHandler.getCurrentMonthStartTime(), TimeHandler.getCurrentMonthEndTime());
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("data", list);
+        res.setPayload(payload);
+        res.setMessage(Message.SUCCESS);
+        return res;
+    }
+
 }

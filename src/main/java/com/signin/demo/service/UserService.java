@@ -9,4 +9,9 @@ public interface UserService {
     public Response userLogin(UserLogin userLogin);
 
     public Response userRegister(UserRegister userRegister);
+
+    public Response getUserProfile(String number);
+
+    public Response changePass(String number, String pass);
+
 }

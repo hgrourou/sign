@@ -54,14 +54,16 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
                 } else {
                     if(!httpRequest.getRequestURI().contains(BaseConfig.ERROR_URL_TEMPLATE)) {
                         /* If token is not presented, return unauthorized error */
-                        httpResponse.sendRedirect(httpRequest.getContextPath() + BaseConfig.ERROR_1002);
+                        httpResponse.setStatus(401);
+                        // httpResponse.sendRedirect(httpRequest.getContextPath() + BaseConfig.ERROR_1002);
                         return;
                     }
                 }
             } else {
                 if (!httpRequest.getRequestURI().contains(BaseConfig.ERROR_URL_TEMPLATE)) {
                     /* If token is not presented, return unauthorized error */
-                    httpResponse.sendRedirect(httpRequest.getContextPath() + BaseConfig.ERROR_1001);
+                    httpResponse.setStatus(401);
+                    // httpResponse.sendRedirect(httpRequest.getContextPath() + BaseConfig.ERROR_1001);
                     return;
                 }
             }

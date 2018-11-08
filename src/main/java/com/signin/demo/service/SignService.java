@@ -5,4 +5,7 @@ import com.signin.demo.config.Response;
 public interface SignService {
 
     public Response userSign(String number);
+
+    public Response getUserSigns(String number);
+
 }

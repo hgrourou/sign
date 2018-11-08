@@ -5,9 +5,11 @@ import com.signin.demo.api.request.UserRegister;
 import com.signin.demo.config.BaseConfig;
 import com.signin.demo.config.Message;
 import com.signin.demo.config.Response;
+import com.signin.demo.dao.SignDAO;
 import com.signin.demo.dao.UserDAO;
 import com.signin.demo.entity.User;
 import com.signin.demo.service.UserService;
+import com.signin.demo.util.TimeHandler;
 import com.signin.demo.util.TokenHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +29,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired(required = false)
     private UserDAO userDAO;
+
+    @Autowired(required = false)
+    private SignDAO signDAO;
 
     @Autowired
     @Qualifier("authenticationManager")
@@ -50,8 +55,7 @@ public class UserServiceImpl implements UserService {
             res.setMessage(Message.LOGIN_ERROR);
             return res;
         }
-        User user = new User();
-        user = userDAO.getUserByNumber(number);
+        User user = userDAO.getUserByNumber(number);
         if (user == null) {
             res.setMessage(Message.USER_NOT_EXIST);
             return res;
@@ -105,6 +109,38 @@ public class UserServiceImpl implements UserService {
             res.setPayload(payload);
             return res;
         }
+        res.setMessage(Message.SUCCESS);
+        return res;
+    }
+
+    @Override
+    public Response getUserProfile(String number) {
+        Response res = new Response();
+        User user = userDAO.getUserByNumber(number);
+        if (user == null) {
+            res.setMessage(Message.USER_NOT_EXIST);
+            return res;
+        }
+        user.setPassword(null);
+        res.setMessage(Message.SUCCESS);
+        Map<String, Object> payload = new HashMap<>();
+        Integer count = signDAO.getCountByStamp(number, TimeHandler.getCurrentMonthStartTime(), TimeHandler.getCurrentMonthEndTime());
+        payload.put("user", user);
+        payload.put("count", count);
+        res.setPayload(payload);
+        return res;
+    }
+
+    @Override
+    public Response changePass(String number, String pass) {
+        Response res = new Response();
+        User user = userDAO.getUserByNumber(number);
+        if (user == null) {
+            res.setMessage(Message.USER_NOT_EXIST);
+            return res;
+        }
+        user.setPassword(pass);
+        userDAO.updateUserPass(user);
         res.setMessage(Message.SUCCESS);
         return res;
     }

@@ -64,9 +64,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         UsernamePasswordAuthenticationFilter.class);
 
         http.authorizeRequests()
-                .antMatchers("/user/login", "/user/sign", "/user/register").permitAll();
-//                .antMatchers("/user/sign", "/xu/bbs/delete/**")
-//                .hasAnyAuthority("user")
+                .antMatchers("/user/login", "/user/register").permitAll()
+                .antMatchers("/user/sign", "/user/profile")
+                .hasAnyAuthority("user");
 //                .antMatchers("/xu/profile/**","/xu/changePassword","/xu/article/list","/xu/bbs/list","/xu/article/fetch/**")
 //                .hasAnyAuthority("ADMIN","USER")
 //                .anyRequest().hasAnyAuthority("USER");

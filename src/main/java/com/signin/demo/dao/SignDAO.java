@@ -1,9 +1,9 @@
 package com.signin.demo.dao;
 
 import com.signin.demo.entity.Sign;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+
+import java.util.ArrayList;
 
 public interface SignDAO {
 
@@ -18,4 +18,19 @@ public interface SignDAO {
             @Param("startTime") Long startTime,
             @Param("endTime") Long endTime
         );
+
+
+
+    @Select("select * from sign where insert_time > #{startTime} and insert_time < #{endTime} and number = #{number} ")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "number", column = "number"),
+            @Result(property = "insertTime", column = "insert_time"),
+            @Result(property = "name", column = "name")
+    })
+    public ArrayList<Sign> getUserSIgnList(
+            @Param("number") String number,
+            @Param("startTime") Long startTime,
+            @Param("endTime") Long endTime
+    );
 }
